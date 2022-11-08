@@ -1,0 +1,345 @@
+# Currently two screens
+windowManager:
+    loginWindow:
+    appWindow:
+    poSelectWindow:
+
+<poSelectWindow>:
+    name:"screen_po_select"
+    id: po_select
+    MDCard:
+        size_hint: None, None
+        size: 300, 400
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 10
+        spacing: 5
+        orientation: 'vertical'
+
+        MDLabel:
+            id: rms_helper_po_select
+            text: "RMSHelper PO Select"
+            font_size: 25
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+        MDRoundFlatButton:
+            text: "Select"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press: app.rmshelper_po_select()
+
+        MDRoundFlatButton:
+            text: "Exit"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press: app.po_select_exit()
+
+        MDLabel:
+            id: msg_label
+            text: "Message"
+            font_size: 10
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+<loginWindow>:
+    name:"screen_login"
+    id: screen_login
+    MDCard:
+        size_hint: None, None
+        size: 300, 400
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 10
+        spacing: 5
+        orientation: 'vertical'
+
+        MDLabel:
+            id: rmshelper_label
+            text: "RMSHelper Client"
+            font_size: 25
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+        MDTextField:
+            id: ip_address
+            hint_text: "Server IP Address"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 200
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+
+        MDRoundFlatButton:
+            text: "LOG IN"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press: app.rmshelper_client_connect()
+
+        MDRoundFlatButton:
+            text: "CLEAR"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press: app.clear()
+
+        MDLabel:
+            id: msg_label
+            text: "Message"
+            font_size: 10
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+<appWindow>:
+    name:"screen_app"
+    id: app_screens
+    BoxLayout:
+        orientation: 'vertical'
+        #Comment MDTopAppBar section to remove toolbar and still maintain full fucntionality
+        MDTopAppBar:
+            title: "RMSHelper Client"
+            size_hint: (1, 0.1)
+            elevation: 10
+            left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+            right_action_items:
+                [
+                ["PO", lambda x: app.po_select_cb(x), "PO Select"],
+                ['logout', lambda x: app.app_exit_cb(x), "Exit RMSHelperClient"]
+                ]
+
+        #End MDTopAppBar section
+        ScreenManager:
+            id: sm_sub
+            Screen:
+                rgba: 0, 1, 1, 1
+                orientation: 'vertical'
+                name:"screen_app_activity"
+
+                # RMSHelperClient Item Screen
+                MDBoxLayout:
+                    pos_hint:{'center_y':.95}
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text:"UPC"
+                        pos_hint:{'center_y':.5}
+                        width: self.height
+                    MDTextField:
+                        id: upc
+                        size_hint_x: None
+                        focus: True
+                        width: 300
+                        font_size: 15
+                        pos_hint: {"center_y": 0.5}
+                        helper_text_mode: "on_focus"
+                        line_color_focus: 1, 0, 1, 1
+                        color_active: 1, 0, 0, 1
+                        mode: "fill"
+                        fill_color: 0, 0, 0, .4
+                    MDLabel:
+                        text:"Last Sold"
+                        pos_hint:{'center_y':0.5}
+                    MDLabel:
+                        id: ip_address
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_y": 0.5}
+                MDBoxLayout:
+                    pos_hint:{'center_y':.85}
+                    MDLabel:
+                        text:"DESC"
+                        pos_hint:{'center_y':.5}
+                        padding: "4dp", "4dp"
+                        background_color: (0, 0, 1, 1)
+                        canvas.before:
+                            Color:
+                                rgba: self.background_color
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                    MDLabel:
+                        id: description
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_y": 0.5}
+                        padding: "4dp", "4dp"
+                MDBoxLayout:
+                    pos_hint:{'center_y':.65}
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text:"D1"
+                        pos_hint:{'center_x':.1}
+                    MDTextField:
+                        id: desc1
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.2}
+                    MDLabel:
+                        text:"RP"
+                        pos_hint:{'center_x':.5}
+                    MDTextField:
+                        id: retail_price
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.6}
+                    MDLabel:
+                        text:"7"
+                        pos_hint:{'center_x':.7}
+                    MDTextField:
+                        id: seven_day
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.8}
+                BoxLayout:
+                    pos_hint:{'center_y':.55}
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text:"D2"
+                        pos_hint:{'center_x':.1}
+                    MDTextField:
+                        id: desc2
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.2}
+                    MDLabel:
+                        text:"SP"
+                        pos_hint:{'center_x':.5}
+                    MDTextField:
+                        id: sale_price
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.6}
+                    MDLabel:
+                        text:"14"
+                        pos_hint:{'center_x':.7}
+                    MDTextField:
+                        id: fourteen_day
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.8}
+                BoxLayout:
+                    pos_hint:{'center_y':.45}
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text:"D3"
+                        pos_hint:{'center_x':.1}
+                    MDTextField:
+                        id: desc3
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.2}
+                    MDLabel:
+                        text:"CO"
+                        pos_hint:{'center_x':.5}
+                    MDTextField:
+                        id: cost_price
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.6}
+                    MDLabel:
+                        text:"30"
+                        pos_hint:{'center_x':.7}
+                    MDTextField:
+                        id: thirty_day
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.8}
+                BoxLayout:
+                    pos_hint:{'center_y':.35}
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text:"DEPT"
+                        pos_hint:{'center_x':.1}
+                    MDTextField:
+                        id: dept
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.2}
+                    MDLabel:
+                        text:"SS"
+                        pos_hint:{'center_x':.5}
+                    MDTextField:
+                        id: sale_start
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.6}
+                BoxLayout:
+                    pos_hint:{'center_y':.25}
+                    orientation: 'horizontal'
+                    MDLabel:
+                        text:"SUPP"
+                        pos_hint:{'center_x':.1}
+                    MDTextField:
+                        id: supply
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.2}
+                    MDLabel:
+                        text:"SE"
+                        pos_hint:{'center_x':.5}
+                    MDTextField:
+                        id: sale_end
+                        size_hint_x: None
+                        width: 200
+                        font_size: 15
+                        pos_hint: {"center_x": 0.6}
+                BoxLayout:
+                    pos_hint:{'center_y':.1}
+                    orientation: 'horizontal'
+                    MDRoundFlatButton:
+                        text: "Select"
+                        font_size: 12
+                        pos_hint: {"center_x": 0.5}
+                        on_press: app.select()
+                    MDRoundFlatButton:
+                        text: "CLEAR"
+                        font_size: 12
+                        pos_hint: {"center_x": 0.5}
+                        on_press: app.clear()
+
+            Screen:
+                name:"screen_app_table"
+                MDLabel:
+                    text:"Table Screen Label"
+                    pos_hint:{'center_x':1}
+            Screen:
+                name:"po_select_activity"
+                MDLabel:
+                    text:"PO Select"
+                    pos_hint:{'center_x':1}
+    MDNavigationDrawer:
+        id: nav_drawer
+        BoxLayout:
+            orientation: 'vertical'
+            Button:
+                text:"activity screen"
+                on_release:
+                    sm_sub.current='screen_app_activity'
+            Button:
+                text:"table screen"
+                on_release:
+                    sm_sub.current='screen_app_table'
+            Button:
+                text:"PO Select"
+                on_release:
+                    sm_sub.current='po_select_activity'
