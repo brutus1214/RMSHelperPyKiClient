@@ -9,6 +9,9 @@ install_twisted_reactor()
 
 from twisted.internet import reactor, protocol
 
+from kivy.core.window import Window
+Window.size = (360, 760)
+
 class EchoClient(protocol.Protocol):
     def connectionMade(self):
         self.factory.app.on_connection(self.transport)
