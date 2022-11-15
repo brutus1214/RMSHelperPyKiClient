@@ -116,7 +116,7 @@ windowManager:
         ScreenManager:
             id: sm_sub
             Screen:
-                rgba: 0, 1, 1, 1
+                #rgba: 0, 1, 1, 1
                 orientation: 'vertical'
                 name:"screen_app_activity"
 
@@ -169,11 +169,11 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                         padding: "4dp", "4dp"
                 MDBoxLayout:
-                    pos_hint:{'center_y':.75}
+                    pos_hint:{'center_y':0.75}
                     orientation: 'horizontal'
                     MDLabel:
                         text:"D1"
-                        pos_hint:{'center_y':.5}
+                        pos_hint:{'center_y':0.5}
                         padding: "4dp", "4dp"
                     MDTextField:
                         id: desc1
@@ -186,7 +186,6 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: retail_price
-                        size_hint_x: None
                         font_size: 15
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
@@ -196,20 +195,18 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: seven_day
-                        size_hint_x: None
                         font_size: 15
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
-                BoxLayout:
+                MDBoxLayout:
                     pos_hint:{'center_y':0.65}
                     orientation: 'horizontal'
                     MDLabel:
                         text:"D2"
-                        padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
+                        padding: "4dp", "4dp"
                     MDTextField:
                         id: desc2
-                        size_hint_x: None
                         font_size: 15
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
@@ -219,7 +216,6 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: sale_price
-                        size_hint_x: None
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
                         font_size: 15
@@ -229,11 +225,10 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: fourteen_day
-                        size_hint_x: None
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
                         font_size: 15
-                BoxLayout:
+                MDBoxLayout:
                     pos_hint:{'center_y':0.55}
                     orientation: 'horizontal'
                     MDLabel:
@@ -242,7 +237,6 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: desc3
-                        size_hint_x: None
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
                         font_size: 15
@@ -252,7 +246,6 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: cost_price
-                        size_hint_x: None
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
                         font_size: 15
@@ -262,66 +255,87 @@ windowManager:
                         pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: thirty_day
-                        size_hint_x: None
                         padding: "4dp", "4dp"
                         pos_hint: {"center_y": 0.5}
                         font_size: 15
-                BoxLayout:
+                MDBoxLayout:
                     pos_hint:{'center_y':0.45}
                     orientation: 'horizontal'
                     MDLabel:
                         text:"DEPT"
-                        pos_hint:{'center_x':.1}
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: dept
-                        size_hint_x: None
-                        width: 200
+                        padding: "4dp", "4dp"
                         font_size: 15
-                        pos_hint: {"center_x": 0.2}
+                        pos_hint: {"center_y": 0.5}
                     MDLabel:
                         text:"SS"
-                        pos_hint:{'center_x':.5}
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: sale_start
-                        size_hint_x: None
-                        width: 200
+                        padding: "4dp", "4dp"
                         font_size: 15
-                        pos_hint: {"center_x": 0.6}
-                BoxLayout:
-                    pos_hint:{'center_y':.25}
+                        pos_hint: {"center_y": 0.5}
+                MDBoxLayout:
+                    pos_hint:{'center_y':0.35}
                     orientation: 'horizontal'
                     MDLabel:
                         text:"SUPP"
-                        pos_hint:{'center_x':.1}
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: supply
-                        size_hint_x: None
-                        width: 200
+                        padding: "4dp", "4dp"
                         font_size: 15
-                        pos_hint: {"center_x": 0.2}
+                        pos_hint: {"center_y": 0.5}
                     MDLabel:
                         text:"SE"
-                        pos_hint:{'center_x':.5}
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
                     MDTextField:
                         id: sale_end
-                        size_hint_x: None
-                        width: 200
+                        padding: "4dp", "4dp"
                         font_size: 15
-                        pos_hint: {"center_x": 0.6}
-                BoxLayout:
-                    pos_hint:{'center_y':.1}
+                        pos_hint: {"center_y": 0.5}
+                MDBoxLayout:
+                    pos_hint:{'center_y':0.05}
+                    orientation: 'vertical'
+                    MDLabel:
+                        text:"Suppliers"
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
+                    ScrollView:
+                        id: suppliers_scroll_view
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        padding: "4dp", "4dp"
+                        MDList:
+                            id: suppliers
+                            size_hint_y: None
+                MDBoxLayout:
+                    pos_hint:{'center_y':0.05}
                     orientation: 'horizontal'
                     MDRoundFlatButton:
-                        text: "Select"
-                        font_size: 12
-                        pos_hint: {"center_x": 0.5}
-                        on_press: app.select()
+                        text: "Print"
+                        font_size: 15
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
+                        on_press: app.print_upc()
                     MDRoundFlatButton:
                         text: "CLEAR"
-                        font_size: 12
-                        pos_hint: {"center_x": 0.5}
-                        on_press: app.clear()
-
+                        font_size: 15
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
+                        on_press: app.clear_app()
+                    MDRoundFlatButton:
+                        text: "Select"
+                        font_size: 15
+                        padding: "4dp", "4dp"
+                        pos_hint: {"center_y": 0.5}
+                        on_press: app.select_upc(upc)
             Screen:
                 name:"screen_app_table"
                 MDLabel:
@@ -334,17 +348,17 @@ windowManager:
                     pos_hint:{'center_x':1}
     MDNavigationDrawer:
         id: nav_drawer
-        BoxLayout:
+        MDBoxLayout:
             orientation: 'vertical'
-            Button:
+            MDRoundFlatButton:
                 text:"activity screen"
                 on_release:
                     sm_sub.current='screen_app_activity'
-            Button:
+            MDRoundFlatButton:
                 text:"table screen"
                 on_release:
                     sm_sub.current='screen_app_table'
-            Button:
+            MDRoundFlatButton:
                 text:"PO Select"
                 on_release:
                     sm_sub.current='po_select_activity'

@@ -12,6 +12,7 @@ from twisted.internet import reactor, protocol
 from kivy.core.window import Window
 Window.size = (360, 760)
 
+
 class EchoClient(protocol.Protocol):
     def connectionMade(self):
         self.factory.app.on_connection(self.transport)
@@ -59,6 +60,8 @@ class MainApp(MDApp):
         self.theme_cls.primary_palette = "BlueGray"
         kv = Builder.load_file('main.kv')
 
+        Window.clearcolor = (0, 0, 1, 1)
+
         # adding theme_color
         self.theme_cls.theme_style = "Light"
 
@@ -89,5 +92,30 @@ class MainApp(MDApp):
 
     def po_select_cb(self, data):
         sm.current = 'screen_po_select'
+
+    def select_upc(self, data):
+        pass
+
+    def clear_app(self):
+        clear_screen = self.root.get_screen('screen_app')
+        clear_screen.ids.upc.text = ""
+        clear_screen.ids.last_sold.text = ""
+        clear_screen.ids.description.text = ""
+        clear_screen.ids.desc1.text = ""
+        clear_screen.ids.retail_price.text = ""
+        clear_screen.ids.seven_day.text = ""
+        clear_screen.ids.desc2.text = ""
+        clear_screen.ids.sale_price.text = ""
+        clear_screen.ids.fourteen_day.text = ""
+        clear_screen.ids.desc3.text = ""
+        clear_screen.ids.cost_price.text = ""
+        clear_screen.ids.thirty_day.text = ""
+        clear_screen.ids.dept.text = ""
+        clear_screen.ids.sale_start.text = ""
+        clear_screen.ids.supply.text = ""
+        clear_screen.ids.sale_end.text = ""
+
+    def print_upc(self):
+        pass
 
 MainApp().run()
