@@ -1,41 +1,19 @@
+import os
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.support import install_twisted_reactor
 import logging
+from kivy import platform
+#if platform == "android":
+#    from android.permissions import request_permissions, Permission
+#    request_permissions([Permission.FOREGROUND_SERVICE])
 
-install_twisted_reactor()
-
-from twisted.internet import reactor, protocol
 
 from kivy.core.window import Window
 Window.size = (360, 760)
 
 
-class EchoClient(protocol.Protocol):
-    def connectionMade(self):
-        self.factory.app.on_connection(self.transport)
-
-    def dataReceived(self, data):
-        logging.info('Client Received Message')
-        self.factory.app.print_message(data.decode('utf-8'))
-
-
-class EchoClientFactory(protocol.ClientFactory):
-    protocol = EchoClient
-
-    def __init__(self, app):
-        self.app = app
-
-    def startedConnecting(self, connector):
-        self.app.print_message('Started to connect.')
-
-    def clientConnectionLost(self, connector, reason):
-        self.app.print_message('Lost connection.')
-
-    def clientConnectionFailed(self, connector, reason):
-        self.app.print_message('Connection failed.')
 
 class poSelectWindow(Screen):
     pass
